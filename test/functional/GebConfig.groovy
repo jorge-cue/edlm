@@ -33,3 +33,6 @@ environments {
 }
 
 baseUrl = 'http://localhost:8080/edlm/'
+
+reportsDir = 'target/geb-reports'
+

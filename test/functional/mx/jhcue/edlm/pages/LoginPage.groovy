@@ -11,14 +11,13 @@ class LoginPage extends Page {
     
     static url = 'login/auth'
     
-    static at = { title == 'Login' }
+    static at = { $('#loginForm', 0) != null }
     
-    static contains = {
+    static content = {
         username { $('#username', 0) }
         password { $('#password', 0) }
         rememberMe { $('#remember_me', 0) }
-        submit(to: HomePage) { $('#submit', 0) }
+        submit { $('#submit', 0) }
     }
-	
 }
 

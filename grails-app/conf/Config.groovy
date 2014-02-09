@@ -86,10 +86,21 @@ grails.hibernate.cache.queries = false
 environments {
     development {
         grails.logging.jul.usebridge = true
+        grails.plugin.springsecurity.mock.active = true
+        grails.plugin.springsecurity.mock.fullName = 'Jorge Horacio Cué Cantú'
+        grails.plugin.springsecurity.mock.email = 'jorge.cue@yopmail.com'
+        grails.plugin.springsecurity.mock.username = 'jorge.cue'
+        grails.plugin.springsecurity.mock.roles = ['ROLE_ADMIN', 'ROLE_USER']
+        grails.plugin.springsecurity.ipRestrictions = [ '/**' : [ '127.0.0.1/8', '::1/128' ] ]
     }
     production {
         grails.logging.jul.usebridge = false
-        // TODO: grails.serverURL = "http://www.changeme.com"
+        grails.serverURL = "http://localhost:8080"
+        grails.plugin.springsecurity.mock.active = false
+    }
+    test {
+        grails.logging.jul.usebridge = true
+        grails.plugin.springsecurity.mock.active = false
     }
 }
 

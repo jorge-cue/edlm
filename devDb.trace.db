@@ -1,6 +1,0 @@
-01-26 16:02:13 jdbc[11]: exception
-org.h2.jdbc.JdbcSQLException: Table "USER_AUTHORITIES" not found; SQL statement:
-alter table user_authorities drop constraint FKCE1004ADDD86CBA8 [42102-173]
-01-26 16:02:13 jdbc[11]: exception
-org.h2.jdbc.JdbcSQLException: Table "USER_AUTHORITIES" not found; SQL statement:
-alter table user_authorities drop constraint FKCE1004AD7D32240C [42102-173]

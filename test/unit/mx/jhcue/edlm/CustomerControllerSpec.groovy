@@ -53,7 +53,8 @@ class CustomerControllerSpec extends Specification {
             response.reset()
             populateValidParams(params)
             customer = new Customer(params)
-
+            request.format = 'form'
+        
             controller.save(customer)
 
         then:"A redirect is issued to the show action"
@@ -97,6 +98,7 @@ class CustomerControllerSpec extends Specification {
 
     void "Test the update action performs an update on a valid domain instance"() {
         when:"Update is called for a domain instance that doesn't exist"
+            request.format = 'form'
             controller.update(null)
 
         then:"A 404 error is returned"
@@ -118,6 +120,7 @@ class CustomerControllerSpec extends Specification {
             response.reset()
             populateValidParams(params)
             customer = new Customer(params).save(flush: true)
+            request.format = 'form'
             controller.update(customer)
 
         then:"A redirect is issues to the show action"
@@ -127,6 +130,7 @@ class CustomerControllerSpec extends Specification {
 
     void "Test that the delete action deletes an instance if it exists"() {
         when:"The delete action is called for a null instance"
+            request.format = 'form'
             controller.delete(null)
 
         then:"A 404 is returned"
@@ -142,6 +146,7 @@ class CustomerControllerSpec extends Specification {
             Customer.count() == 1
 
         when:"The domain instance is passed to the delete action"
+            request.format = 'form'
             controller.delete(customer)
 
         then:"The instance is deleted"

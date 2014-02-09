@@ -78,5 +78,6 @@ grails.project.dependency.resolution = {
         //runtime ":yui-minify-resources:0.1.5"
         test "org.grails.plugins:geb:0.9.2"
         compile ":spring-security-core:2.0-RC2"
+        test ":spring-security-mock:2.0-RC2"    
     }
 }

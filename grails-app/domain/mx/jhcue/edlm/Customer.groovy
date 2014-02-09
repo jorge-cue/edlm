@@ -16,7 +16,6 @@ class Customer {
         motherLastName  maxSize: 128, nullable: true
         curp            maxSize: 18, matches: /^(?i:[a-z]{4}[0-9]{6}[a-z]{4}[a-z0-9]{4})$/, unique: true
         rfc             maxSize: 13, matches: /^(?i:[a-z]{4}[0-9]{6}([a-z0-9]{3})?)$/, unique: true
-        active          nullable: false
         birthDate       max: new Date()
     }
 }

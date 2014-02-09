@@ -3,18 +3,22 @@ package mx.jhcue.edlm
 
 
 import static org.springframework.http.HttpStatus.*
+import org.springframework.security.access.annotation.Secured
 import grails.transaction.Transactional
 
+@Secured(['ROLE_ADMIN'])
 @Transactional(readOnly = true)
 class CustomerController {
 
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
+    @Secured(['ROLE_USER'])
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond Customer.list(params), model:[customerInstanceCount: Customer.count()]
     }
 
+    @Secured(['ROLE_USER'])
     def show(Customer customerInstance) {
         respond customerInstance
     }
@@ -92,6 +96,7 @@ class CustomerController {
         }
     }
 
+    @Secured(['ROLE_USER'])
     protected void notFound() {
         request.withFormat {
             form {

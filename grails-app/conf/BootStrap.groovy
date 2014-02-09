@@ -9,26 +9,36 @@ class BootStrap {
     def init = { servletContext ->
         environments {
             development {
-                createAdminUser()
+                if (User.count() == 0) {
+                    createAdminAndUser()
+                }
             }
             test {
-                createAdminUser()
+                createAdminAndUser()
                 createTestData()
             }
             production {
-                createAdminUser()
+                if (User.count() == 0) {
+                    createAdminAndUser()
+                }
             }
         }
     }
+
     def destroy = {
     }
     
-    def createAdminUser() {
-        def admin = new User(username: 'admin', password: 'Admin123').save(failOnError: true);
-        def roleAdmin = new Authorities(authority: 'ROLE_ADMIN').save(failOnError: true);
-        def roleUser = new Authorities(authority: 'ROLE_USER').save(failOnError: true);
-        UserAuthorities.create(admin, roleAdmin, true);
-        UserAuthorities.create(admin, roleUser, true);
+    def createAdminAndUser() {
+        def admin = new User(username: 'admin', password: 'Admin123').save(failOnError: true, flush: true);
+        def user = new User(username: 'user', password: 'User456').save(failOnError: true, flush: true);
+        
+        def roleAdmin = new Authorities(authority: 'ROLE_ADMIN').save(failOnError: true, flush: true);
+        def roleUser = new Authorities(authority: 'ROLE_USER').save(failOnError: true, flush: true);
+        
+        UserAuthorities.create admin, roleAdmin, true
+        UserAuthorities.create admin, roleUser, true
+        
+        UserAuthorities.create user, roleUser, true
     }
 
     def createTestData() {
@@ -40,7 +50,7 @@ class BootStrap {
             rfc : 'RFCA010101',
             active : 'True',
             birthDate : Date.parse('yyyy/mm/dd', '1958/8/18').clearTime()
-        ).save(failOnError: true)
+        ).save(failOnError: true, flush: true)
         assert customer.id == 1
     }
 }
